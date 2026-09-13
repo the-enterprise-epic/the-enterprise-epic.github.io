@@ -1,193 +1,451 @@
 {
   "version": 1,
-  "thresholds": { "pass": 2.0, "held": 2.5 },
+  "thresholds": {
+    "pass": 2.0,
+    "held": 2.5
+  },
   "gates": [
-    { "id": 1, "name": "Accumulation", "question": "Can we collect, store and retrieve the data?", "facets": "Volume · coverage · availability" },
-    { "id": 2, "name": "Accessibility", "question": "Can authorised people find and use it?", "facets": "Catalogues · permissions · self-service" },
-    { "id": 3, "name": "Interpretation", "question": "Do we agree on what it means and what it can support?", "facets": "Semantics · context · questions · limitations" },
-    { "id": 4, "name": "Assurance", "question": "Can we challenge, reproduce and defend the insight?", "facets": "Evidence · counter-stories · uncertainty · lineage" },
-    { "id": 5, "name": "Consequence", "question": "Did the insight change action and improve an outcome?", "facets": "Decision · ownership · intervention · learning" }
+    {
+      "id": 1,
+      "name": "Accumulation",
+      "question": "Can we collect, store and retrieve the data?",
+      "facets": "Volume · coverage · availability"
+    },
+    {
+      "id": 2,
+      "name": "Accessibility",
+      "question": "Can authorised people find and use it?",
+      "facets": "Catalogues · permissions · self-service"
+    },
+    {
+      "id": 3,
+      "name": "Interpretation",
+      "question": "Do we agree on what it means and what it can support?",
+      "facets": "Semantics · context · questions · limitations"
+    },
+    {
+      "id": 4,
+      "name": "Assurance",
+      "question": "Can we challenge, reproduce and defend the insight?",
+      "facets": "Evidence · counter-stories · uncertainty · lineage"
+    },
+    {
+      "id": 5,
+      "name": "Consequence",
+      "question": "Did the insight change action and improve an outcome?",
+      "facets": "Decision · ownership · intervention · learning"
+    }
   ],
   "questions": [
     {
-      "id": "q1", "gate": 1, "eyebrow": "Accumulation",
+      "id": "q1",
+      "gate": 1,
+      "eyebrow": "Accumulation",
       "prompt": "A leader asks for last quarter's figures for a strategically important customer segment.",
       "options": [
-        { "text": "Someone has to go and find them. They live in several team spreadsheets and nobody is sure which is current.", "score": 0 },
-        { "text": "The data is in the warehouse, but a whole channel, region or product line is missing and nobody has written that down.", "score": 1 },
-        { "text": "It is collected and stored centrally, and we know roughly what is and is not covered.", "score": 2 },
-        { "text": "Collected, stored and retrievable, with coverage gaps documented and visible to whoever uses it.", "score": 3 }
+        {
+          "text": "Nobody holds them in one place; they have to be rebuilt from team spreadsheets.",
+          "score": 0
+        },
+        {
+          "text": "The data is in the warehouse, but a whole channel, region or product line is missing and nobody has written that down.",
+          "score": 1
+        },
+        {
+          "text": "It is collected and stored centrally, and we know roughly what is and is not covered.",
+          "score": 2
+        },
+        {
+          "text": "Collected, stored and retrievable, with coverage gaps documented and visible to whoever uses it.",
+          "score": 3
+        }
       ]
     },
     {
-      "id": "q2", "gate": 2, "eyebrow": "Accessibility",
+      "id": "q2",
+      "gate": 2,
+      "eyebrow": "Accessibility",
       "prompt": "An analyst in another function needs that data for a legitimate purpose.",
       "options": [
-        { "text": "They ask a colleague who has a copy. Access follows who you know.", "score": 0 },
-        { "text": "They raise a ticket and wait weeks; when it arrives they cannot tell whether they may use it for this purpose.", "score": 1 },
-        { "text": "They find it in a catalogue and get access through a defined route, though permissions reflect what is technically available rather than what is authorised.", "score": 2 },
-        { "text": "They find it, see who owns it, and receive purpose-bound access through self-service.", "score": 3 }
+        {
+          "text": "They ask a colleague who has a copy. Access follows who you know.",
+          "score": 0
+        },
+        {
+          "text": "They raise a ticket and wait weeks for access.",
+          "score": 1
+        },
+        {
+          "text": "They find it in a catalogue and get access through a set route, though nobody checks what it will be used for.",
+          "score": 2
+        },
+        {
+          "text": "They find it, see who owns it, and get access for their stated purpose through self-service.",
+          "score": 3
+        }
       ]
     },
     {
-      "id": "q3", "gate": 3, "eyebrow": "Interpretation · meaning",
+      "id": "q3",
+      "gate": 3,
+      "eyebrow": "Interpretation · meaning",
       "prompt": "Two functions present <i>churn</i> in the same meeting, and the numbers differ.",
       "options": [
-        { "text": "The meeting argues about which number is right and ends by asking for another report.", "score": 0 },
-        { "text": "Everyone knows the definitions differ; the difference is explained aloud each time and never written down.", "score": 1 },
-        { "text": "Decision-critical terms have a written definition and an owner, but approved variants and historical meanings are lost when one canonical definition is imposed.", "score": 2 },
-        { "text": "Each term has an accountable owner, a domain of validity and retrievable history; the disagreement is visible and treated as evidence.", "score": 3 }
+        {
+          "text": "The meeting argues about which number is right and ends by asking for another report.",
+          "score": 0
+        },
+        {
+          "text": "Everyone knows the definitions differ; the difference is explained aloud each time and never written down.",
+          "score": 1
+        },
+        {
+          "text": "Decision-critical terms have a written definition and an owner, but approved variants and historical meanings are lost when one canonical definition is imposed.",
+          "score": 2
+        },
+        {
+          "text": "Each term has an owner, a recorded history and a clear scope; disagreement is visible and treated as evidence.",
+          "score": 3
+        }
       ]
     },
     {
-      "id": "q4", "gate": 3, "eyebrow": "Interpretation · answerability",
+      "id": "q4",
+      "gate": 3,
+      "eyebrow": "Interpretation · answerability",
       "prompt": "Before analysis begins on a consequential decision, someone asks what this data can actually support.",
       "options": [
-        { "text": "Nobody asks. Analysis starts from whatever data is available, and the question is shaped to fit it.", "score": 0 },
-        { "text": "The question is named, but the type of claim and the evidence it would need are not declared.", "score": 1 },
-        { "text": "Decision, question and claim type are written down; population, period and exclusions are defined.", "score": 2 },
-        { "text": "All of that, and answerability is checked against what the data can bear before work starts; unsupported claims are marked as such.", "score": 3 }
+        {
+          "text": "Nobody asks. Analysis starts from whatever data is available, and the question is shaped to fit it.",
+          "score": 0
+        },
+        {
+          "text": "The question is named, but nobody states what kind of claim it needs or what evidence would settle it.",
+          "score": 1
+        },
+        {
+          "text": "Decision, question and type of claim are written down, with the population, period and exclusions defined.",
+          "score": 2
+        },
+        {
+          "text": "All of that, and someone checks the data can answer the question before work starts; claims it cannot support are labelled.",
+          "score": 3
+        }
       ]
     },
     {
-      "id": "q5", "gate": 4, "eyebrow": "Assurance · provenance",
+      "id": "q5",
+      "gate": 4,
+      "eyebrow": "Assurance · provenance",
       "prompt": "A board member asks how a headline number in the pack was produced.",
       "options": [
-        { "text": "The presenter cannot say. The number came from a dashboard, and the dashboard came from somewhere.", "score": 0 },
-        { "text": "An analyst could reconstruct it in a day or two by retracing spreadsheets and queries.", "score": 1 },
-        { "text": "Source, definition, time window and transformation are documented; reproduction is possible but manual.", "score": 2 },
-        { "text": "The claim links to its source, method, version and approval, and can be replayed as it stood at decision time.", "score": 3 }
+        {
+          "text": "The presenter cannot say. The number came from a dashboard, and the dashboard came from somewhere.",
+          "score": 0
+        },
+        {
+          "text": "An analyst could reconstruct it in a day or two by retracing spreadsheets and queries.",
+          "score": 1
+        },
+        {
+          "text": "Source, definition, time window and transformation are documented; reproduction is possible but manual.",
+          "score": 2
+        },
+        {
+          "text": "The claim links to its source, method, version and approval, and can be replayed as it stood at decision time.",
+          "score": 3
+        }
       ]
     },
     {
-      "id": "q6", "gate": 4, "eyebrow": "Assurance · counter-story",
+      "id": "q6",
+      "gate": 4,
+      "eyebrow": "Assurance · counter-story",
       "prompt": "The preferred explanation is on the table and the room is ready to move.",
       "options": [
-        { "text": "One narrative is presented as self-evident. Raising a counter-story would be read as opposition.", "score": 0 },
-        { "text": "Someone may play devil's advocate informally, but nobody owns the challenge and it leaves no record.", "score": 1 },
-        { "text": "A plausible counter-story is written down for major decisions, but rarely tested against evidence.", "score": 2 },
-        { "text": "The strongest counter-story is named, linked to a test that could tell the two apart, and its outcome recorded before commitment.", "score": 3 }
+        {
+          "text": "One narrative is presented as self-evident. Raising a counter-story would be read as opposition.",
+          "score": 0
+        },
+        {
+          "text": "Someone may play devil's advocate informally, but nobody owns the challenge and it leaves no record.",
+          "score": 1
+        },
+        {
+          "text": "A plausible counter-story is written down for major decisions, but rarely tested against evidence.",
+          "score": 2
+        },
+        {
+          "text": "The strongest counter-story is named, linked to a test that could tell the two apart, and its outcome recorded before commitment.",
+          "score": 3
+        }
       ]
     },
     {
-      "id": "q7", "gate": 4, "eyebrow": "Assurance · uncertainty",
-      "prompt": "How does uncertainty reach the decision-maker?",
+      "id": "q7",
+      "gate": 4,
+      "eyebrow": "Assurance · uncertainty",
+      "prompt": "A forecast with real uncertainty goes to the person who must decide.",
       "options": [
-        { "text": "It does not. Point estimates appear without caveats or freshness; confidence is expressed as tone.", "score": 0 },
-        { "text": "Caveats sit in a footnote or appendix the decision-maker never reads.", "score": 1 },
-        { "text": "What is estimated, incomplete, delayed or contested is stated, but collapsed into one score or a traffic light.", "score": 2 },
-        { "text": "Observation, inference, projection and unknowns are visibly separated, in a form the decision-maker can act on.", "score": 3 }
+        {
+          "text": "It arrives as a single number, with no caveats and no date; confidence is expressed as tone.",
+          "score": 0
+        },
+        {
+          "text": "The caveats sit in a footnote or appendix the decision-maker never reads.",
+          "score": 1
+        },
+        {
+          "text": "What is estimated, incomplete or contested is stated, but collapsed into one score or a traffic light.",
+          "score": 2
+        },
+        {
+          "text": "What was observed, inferred, projected and unknown is shown separately, in a form the decision-maker can act on.",
+          "score": 3
+        }
       ]
     },
     {
-      "id": "q8", "gate": 5, "eyebrow": "Consequence · action",
+      "id": "q8",
+      "gate": 5,
+      "eyebrow": "Consequence · action",
       "prompt": "An insight is accepted. What happens on Monday?",
       "options": [
-        { "text": "Nothing specific. The insight is noted, the deck is filed, and people return to existing plans.", "score": 0 },
-        { "text": "Someone acts on it, but the action drifts: a bounded pilot becomes a rules change nobody authorised.", "score": 1 },
-        { "text": "A named owner takes the action with a deadline; scope, stop conditions and rollback are informal.", "score": 2 },
-        { "text": "Action, owner, scope, what it will never do and who can stop it are written down before it starts.", "score": 3 }
+        {
+          "text": "Nothing specific. The insight is noted, the deck is filed, and people return to existing plans.",
+          "score": 0
+        },
+        {
+          "text": "Someone acts on it, but the action drifts beyond what was agreed.",
+          "score": 1
+        },
+        {
+          "text": "A named owner takes the action with a deadline; scope, stop conditions and rollback are informal.",
+          "score": 2
+        },
+        {
+          "text": "Action, owner, scope, what it will never do and who can stop it are written down before it starts.",
+          "score": 3
+        }
       ]
     },
     {
-      "id": "q9", "gate": 5, "eyebrow": "Consequence · learning",
+      "id": "q9",
+      "gate": 5,
+      "eyebrow": "Consequence · learning",
       "prompt": "Six months after the decision, what does the organisation know about its effect?",
       "options": [
-        { "text": "Whether it happened. Success is measured by delivery, dashboard views or adoption, not outcomes.", "score": 0 },
-        { "text": "The headline metric improved and success was declared; nobody looked at who lost out or where the work shifted.", "score": 1 },
-        { "text": "Outcomes are reviewed against a baseline for major decisions, but findings rarely change the next question.", "score": 2 },
-        { "text": "Consequences are observed across groups and over time, attributed honestly, and used to update definitions, questions and standards.", "score": 3 }
+        {
+          "text": "Whether it happened. Success is measured by delivery, dashboard views or adoption, not outcomes.",
+          "score": 0
+        },
+        {
+          "text": "The headline metric improved and success was declared; nobody checked who lost out.",
+          "score": 1
+        },
+        {
+          "text": "Outcomes are reviewed against a baseline for major decisions, but findings rarely change the next question.",
+          "score": 2
+        },
+        {
+          "text": "Consequences are observed across groups and over time, attributed honestly, and used to update definitions, questions and standards.",
+          "score": 3
+        }
       ]
     }
   ],
   "levels": [
     {
-      "level": 1, "name": "Accumulation",
-      "verdict": "Your enterprise remembers more than it can reach. Data is being collected, but a current, complete and authorised version of it still depends on who you know. Nothing later in the book works until this is fixed, and the fix is not another warehouse. It is choosing the decision the data must serve.",
-      "symptom": "The most reliable copy of the numbers is a spreadsheet on someone's laptop, and every leadership meeting ends by asking for more data.",
+      "level": 1,
+      "name": "Accumulation",
+      "verdict": "Your enterprise is collecting data it cannot yet rely on. Coverage is patchy, and a current, complete version of a key figure still has to be assembled by hand. Every later capability depends on this level, and the fix is not another warehouse.",
+      "symptom": "Every leadership meeting ends by asking for more data, and the most trusted copy of the numbers lives in someone's spreadsheet.",
       "challenge": "What if the archive keeps growing because no one has named a decision it must answer?",
       "chapters": [
-        { "n": 1, "why": "Name the decision before the dataset." },
-        { "n": 5, "why": "What kind of truth this data can support, and what lies outside its view." },
-        { "n": 4, "why": "Authorised, minimum-necessary access to a shared picture." }
+        {
+          "n": 1,
+          "why": "Name the decision before the dataset."
+        },
+        {
+          "n": 5,
+          "why": "What kind of truth this data can support, and what lies outside its view."
+        },
+        {
+          "n": 4,
+          "why": "Authorised, minimum-necessary access to a shared picture."
+        }
       ],
-      "capability": "Divya Drishti, with the Sanjaya Lens",
-      "cta": "Start with the decision, not the dataset."
+      "capability": "Divya Drishti Engine, with Sanjaya Lens",
+      "cta": "Put one decision at the centre of your data."
     },
     {
-      "level": 2, "name": "Accessibility",
-      "verdict": "People can find the data. They do not agree on what it means. This is where most data strategies stop, and where the dashboards multiply: the same metric carries three values, and the room debates which is right instead of what to do.",
+      "level": 2,
+      "name": "Accessibility",
+      "verdict": "People can find the data. They do not agree on what it means. The dashboards multiply, the same metric carries three values, and the room debates which is right instead of what to do.",
       "symptom": "A red indicator that could mean deterioration, a definition change, a delayed feed or a seasonal pattern, and nobody can say which.",
       "challenge": "What if the functions disagree not because a shared definition is missing, but because each is rewarded for defending its own number?",
       "chapters": [
-        { "n": 2, "why": "A dashboard is a view, not a verdict." },
-        { "n": 6, "why": "Recovering shared meaning, provenance and history." },
-        { "n": 7, "why": "Asking the question that fits the decision." }
+        {
+          "n": 2,
+          "why": "A dashboard is a view, not a verdict."
+        },
+        {
+          "n": 6,
+          "why": "Recovering shared meaning, provenance and history."
+        },
+        {
+          "n": 7,
+          "why": "Asking the question that fits the decision."
+        }
       ],
-      "capability": "The Vyasa Graph, with Arjuna Inquiry",
-      "cta": "Cross the threshold most data strategies never cross."
+      "capability": "Vyasa Graph, with Arjuna Inquiry",
+      "cta": "Agree what the numbers mean."
     },
     {
-      "level": 3, "name": "Interpretation",
+      "level": 3,
+      "name": "Interpretation",
       "verdict": "Your enterprise agrees what its numbers mean, and Project EPIC begins here. What it cannot yet do is say how a claim was produced, what would have to be true for it to be wrong, or how much confidence the evidence warrants. Insights are believed on presentation, not on assurance.",
-      "symptom": "The pack is fluent, the counter-story is unwritten, and confidence is expressed as tone.",
+      "symptom": "The pack is fluent, the counter-story is unwritten, and confidence rests on who presented it.",
       "challenge": "Which decision in the last year was accepted because nobody felt safe enough to challenge it?",
       "chapters": [
-        { "n": 10, "why": "Testing whether a decision survives being wrong." },
-        { "n": 11, "why": "The Nine Gates a claim must pass before anyone acts on it." },
-        { "n": 12, "why": "Reconstructing what was known and authorised." }
+        {
+          "n": 10,
+          "why": "Testing whether a decision survives being wrong."
+        },
+        {
+          "n": 11,
+          "why": "The Nine Gates a claim must pass before anyone acts on it."
+        },
+        {
+          "n": 12,
+          "why": "Reconstructing what was known and authorised."
+        }
       ],
-      "capability": "The Vidura Challenge and the Dharma Ledger",
+      "capability": "Vidura Challenge and Dharma Ledger",
       "cta": "Turn belief into warranted confidence."
     },
     {
-      "level": 4, "name": "Assurance",
+      "level": 4,
+      "name": "Assurance",
       "verdict": "Insights are challenged, traceable and honestly qualified. Then they stop. Either nothing follows, or something follows, drifts beyond its authority and is never measured. The enterprise is trustworthy in analysis and unaccountable in action.",
-      "symptom": "A bounded pilot became a rules change nobody authorised, and success was declared on the headline metric.",
+      "symptom": "The action shipped on time, the dashboard turned green, and nobody can say who was worse off.",
       "challenge": "If the intervention shifted harm onto a smaller group, would anyone in the organisation be responsible for noticing?",
       "chapters": [
-        { "n": 15, "why": "An action contract with an owner, bounds and a way to stop." },
-        { "n": 17, "why": "Did it create durable value, and for whom?" },
-        { "n": 16, "why": "Coordinating systems so the whole action stays legitimate." }
+        {
+          "n": 15,
+          "why": "An action contract with an owner, bounds and a way to stop."
+        },
+        {
+          "n": 17,
+          "why": "Did it create durable value, and for whom?"
+        },
+        {
+          "n": 16,
+          "why": "Coordinating systems so the whole action stays legitimate."
+        }
       ],
-      "capability": "Bhima Actions and the Karma Chakra",
+      "capability": "Bhima Actions and Karma Chakra",
       "cta": "Connect counsel to consequence."
     },
     {
-      "level": 5, "name": "Consequence",
-      "verdict": "Consequences return to governance and change the next question. Few enterprises reach this honestly, so treat the result as a claim to test rather than a badge. The remaining risk is framework theatre: the language spreading faster than the capability takes hold.",
+      "level": 5,
+      "name": "Consequence",
+      "verdict": "Consequences return to governance and change the next question. Few enterprises reach this honestly, so treat the result as a claim to test. The remaining risk is the language of the framework spreading faster than the capability behind it.",
       "symptom": "The framework's name appears in board decks before a second domain has run a full cycle.",
       "challenge": "Could the framework itself be retired responsibly, or has it become the thing nobody may challenge?",
       "chapters": [
-        { "n": 18, "why": "Building the capability without framework theatre." },
-        { "n": 9, "why": "Allocating judgement between people and machines." },
-        { "n": 3, "why": "Governing which signals deserve attention." }
+        {
+          "n": 18,
+          "why": "Building the capability without framework theatre."
+        },
+        {
+          "n": 9,
+          "why": "Allocating judgement between people and machines."
+        },
+        {
+          "n": 3,
+          "why": "Governing which signals deserve attention."
+        }
       ],
-      "capability": "The Enterprise Sabha, with the Karma Chakra",
+      "capability": "Building the EPIC Enterprise, with the Sarathi Reasoner",
       "cta": "Make it last across domains."
     }
   ],
   "chapters": {
-    "1":  { "title": "The Great Accumulation", "parva": "I" },
-    "2":  { "title": "The Dashboard Delusion", "parva": "I" },
-    "3":  { "title": "When Every Signal Looks Important", "parva": "II" },
-    "4":  { "title": "Sanjaya Lens", "parva": "II" },
-    "5":  { "title": "Divya Drishti", "parva": "III" },
-    "6":  { "title": "Vyasa Graph", "parva": "III" },
-    "7":  { "title": "Arjuna's Question", "parva": "IV" },
-    "8":  { "title": "The Question Graph", "parva": "IV" },
-    "9":  { "title": "Sarathi", "parva": "V" },
-    "10": { "title": "Vidura", "parva": "V" },
-    "11": { "title": "When an Insight Deserves to Be Believed", "parva": "VI" },
-    "12": { "title": "The Dharma Ledger", "parva": "VI" },
-    "13": { "title": "Vishvakarma", "parva": "VII" },
-    "14": { "title": "One Insight, Many Audiences", "parva": "VII" },
-    "15": { "title": "Bhima", "parva": "VIII" },
-    "16": { "title": "The Sabha of Enterprise Systems", "parva": "VIII" },
-    "17": { "title": "Karma Chakra", "parva": "IX" },
-    "18": { "title": "Building the EPIC Enterprise", "parva": "IX" }
+    "1": {
+      "title": "The Great Accumulation",
+      "parva": "I"
+    },
+    "2": {
+      "title": "The Dashboard Delusion",
+      "parva": "I"
+    },
+    "3": {
+      "title": "When Every Signal Looks Important",
+      "parva": "II"
+    },
+    "4": {
+      "title": "Sanjaya Lens",
+      "parva": "II"
+    },
+    "5": {
+      "title": "Divya Drishti",
+      "parva": "III"
+    },
+    "6": {
+      "title": "Vyasa Graph",
+      "parva": "III"
+    },
+    "7": {
+      "title": "Arjuna's Question",
+      "parva": "IV"
+    },
+    "8": {
+      "title": "The Question Graph",
+      "parva": "IV"
+    },
+    "9": {
+      "title": "Sarathi",
+      "parva": "V"
+    },
+    "10": {
+      "title": "Vidura",
+      "parva": "V"
+    },
+    "11": {
+      "title": "When an Insight Deserves to Be Believed",
+      "parva": "VI"
+    },
+    "12": {
+      "title": "The Dharma Ledger",
+      "parva": "VI"
+    },
+    "13": {
+      "title": "Vishvakarma",
+      "parva": "VII"
+    },
+    "14": {
+      "title": "One Insight, Many Audiences",
+      "parva": "VII"
+    },
+    "15": {
+      "title": "Bhima",
+      "parva": "VIII"
+    },
+    "16": {
+      "title": "The Sabha of Enterprise Systems",
+      "parva": "VIII"
+    },
+    "17": {
+      "title": "Karma Chakra",
+      "parva": "IX"
+    },
+    "18": {
+      "title": "Building the EPIC Enterprise",
+      "parva": "IX"
+    }
   },
   "share": {
-    "template": "Where does my enterprise stand? Level {level}, {name}{standing}. {breakLine} Read first: Adhyayas {chapters}. From The Enterprise EPIC by Sanjeev Azad. Take it yourself: {url}"
+    "template": "Where does my enterprise stand? Level {level}, {name}{standing}. {breakLine} Read first: chapters {chapters}. From The Enterprise EPIC by Sanjeev Azad. Take it yourself: {url}"
   }
 }

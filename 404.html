@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" data-root="/">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,32 +9,86 @@
 <!-- GitHub Pages serves this page at whatever path was mistyped, so every
      reference here is absolute from the site root. -->
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@500;700&family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/img/favicon-48.png" type="image/png" sizes="48x48">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/cormorant-garamond-600-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
 <style>
-  body { background: var(--parchment); }
-  .lost { min-height: 78vh; display: grid; place-items: center; text-align: center; padding: 3rem 0; }
-  .lost .num { font-family: var(--f-display); font-weight: 700; font-size: clamp(4rem, 14vw, 7rem); color: var(--gold); line-height: 1; margin: 0; }
+  .lost {
+    position: relative; isolation: isolate; overflow: hidden;
+    min-height: 72vh; display: grid; place-items: center; text-align: center; padding: 3.5rem 0;
+    background: var(--parchment);
+  }
+  /* A faded Parva engraving behind the message: the archive with a gap in it. */
+  .lost::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: url("/assets/img/parva-03@2x.jpg") center / cover no-repeat;
+    opacity: .16; filter: sepia(.3);
+  }
+  .lost .num { font-family: var(--f-display); font-weight: 700; font-size: clamp(4rem, 14vw, 7rem); color: var(--gold); line-height: 1; margin: 0; font-variant-numeric: lining-nums; }
   .lost h1 { margin-top: .4rem; }
   .lost p { color: var(--sepia); max-width: 44ch; margin-inline: auto; }
   .lost .btn-row { justify-content: center; }
+  .lost .btn.ghost { background: rgba(255, 255, 255, .7); }
+  .lost .btn.ghost:hover { background: var(--ink); }
 </style>
 </head>
 <body>
-<main class="lost">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <nav class="wrap" aria-label="Main">
+    <a class="brand" href="/">The Enterprise EPIC</a>
+    <a class="nl" href="/#idea">The idea</a>
+    <a class="nl" href="/#levels">Five levels</a>
+    <a class="nl" href="/diagnose.html">Diagnostic</a>
+    <a class="nl" href="/canvases.html">Canvases</a>
+    <a class="btn gold" href="/#buy">Get the book</a>
+  </nav>
+</header>
+
+<main id="main" class="lost">
   <div class="wrap">
     <p class="num" aria-hidden="true">404</p>
     <h1>This scroll is not in the archive</h1>
     <p>The page you were looking for has moved, or was never written. Even a well-kept enterprise memory has gaps.</p>
     <div class="btn-row">
       <a class="btn" href="/">Return home</a>
-      <a class="btn ghost" href="/diagnose.html">Take the diagnostic</a>
-      <a class="btn ghost" href="/canvases.html">Browse the canvases</a>
+      <a class="btn ghost" href="/diagnose.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-ladder"></use></svg>Find your level</a>
+      <a class="btn ghost" href="/canvases.html"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-scroll"></use></svg>Browse the canvases</a>
+      <a class="btn ghost" href="/#buy"><svg class="ic" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-book"></use></svg>Get the book</a>
     </div>
   </div>
 </main>
+
+<footer class="foot-main">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <p class="fh">The Enterprise EPIC</p>
+        <p class="fdesc">From Data Abundance to Decision Clarity in the AI Era. A book by Sanjeev Azad, published by Notion Press.</p>
+      </div>
+      <div>
+        <p class="fh">Explore</p>
+        <ul>
+          <li><a href="/diagnose.html">The diagnostic</a></li>
+          <li><a href="/canvases.html">The canvases</a></li>
+          <li><a href="/#buy">Get the book</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="fh">Elsewhere</p>
+        <ul>
+          <li><a href="https://sanjeev-azad.pages.dev/about/" rel="noopener">The author</a></li>
+          <li><a href="https://sanjeev-azad.pages.dev/contact/" rel="noopener">Contact</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">© <span data-year>2026</span> Sanjeev Azad. All rights reserved.</p>
+  </div>
+</footer>
+
 <script src="/assets/site.js" defer></script>
 <script src="/assets/analytics.js" data-page="404" defer></script>
 </body>

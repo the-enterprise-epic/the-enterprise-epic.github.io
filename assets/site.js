@@ -11,7 +11,7 @@
      <html data-root="../"> when they live in a subfolder. */
   const root = document.documentElement.dataset.root || '';
   EPIC.loadJSON = function (path) {
-    return fetch(root + path, { cache: 'no-cache' }).then(function (r) {
+    return fetch(root + path).then(function (r) {
       if (!r.ok) throw new Error(path + ' ' + r.status);
       return r.json();
     });
@@ -25,6 +25,18 @@
   EPIC.richText = function (s) {
     const esc = String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     return esc.replace(/&lt;(\/?)(i|b)&gt;/g, '<$1$2>');
+  };
+
+  /* Plain text for use inside HTML. */
+  EPIC.escape = function (s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  };
+
+  /* An icon from the site's sprite, drawn in the line style of Figure 1.1.
+     Always decorative: the text beside it carries the meaning. */
+  EPIC.icon = function (name) {
+    return '<svg class="ic" aria-hidden="true" focusable="false"><use href="' + root +
+      'assets/icons.svg#i-' + name + '"></use></svg>';
   };
 
   /* Mark the current page in the nav. */
@@ -41,9 +53,11 @@
   if (buy) {
     EPIC.loadJSON('data/stores.json').then(function (data) {
       buy.innerHTML = '';
-      data.stores.forEach(function (s) {
+      data.stores.forEach(function (s, i) {
         const card = document.createElement('div');
         card.className = 'store';
+        /* QR codes help someone reading on a laptop pick up the book on their
+           phone. CSS hides them on phones, where they cannot be scanned. */
         const qr = document.createElement('div');
         qr.className = 'qr';
         try { qr.innerHTML = window.QR ? window.QR.svg(s.url) : ''; } catch (e) { qr.remove(); }
@@ -59,13 +73,16 @@
         meta.textContent = s.format + ' · ' + s.region;
         card.appendChild(meta);
 
+        /* The first store is the main call to action; the rest are quieter.
+           The spoken label begins with the visible words, then warns about the
+           new tab, so voice control and screen readers agree with the screen. */
         const a = document.createElement('a');
-        a.className = 'btn';
+        a.className = i === 0 ? 'btn' : 'btn ghost';
         a.href = s.url;
         a.rel = 'noopener';
         a.target = '_blank';
-        a.textContent = 'Buy on ' + s.name;
-        a.setAttribute('aria-label', 'Buy The Enterprise EPIC on ' + s.name + ' (opens in a new tab)');
+        a.innerHTML = 'Buy on ' + EPIC.escape(s.name) + EPIC.icon('external') +
+          '<span class="vh"> (opens in a new tab)</span>';
         card.appendChild(a);
 
         buy.appendChild(card);
