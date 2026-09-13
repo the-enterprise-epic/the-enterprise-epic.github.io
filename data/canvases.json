@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "request_url": "https://sanjeev-azad.pages.dev/contact/",
+  "canvases": [
+    {
+      "id": "c01",
+      "adhyaya": 1,
+      "parva": "I",
+      "parva_title": "The Kingdom of Data",
+      "chapter": "The Great Accumulation",
+      "canvas": "Great Accumulation Inventory",
+      "produces": "a one-page Leadership Sensemaking Brief",
+      "step_count": 7,
+      "sample": true,
+      "pdf": "downloads/canvases/EPIC_Canvas_01_Great_Accumulation_Inventory.pdf"
+    },
+    {
+      "id": "c02",
+      "adhyaya": 2,
+      "parva": "I",
+      "parva_title": "The Kingdom of Data",
+      "chapter": "The Dashboard Delusion",
+      "canvas": "Dashboard Value Leakage Scan",
+      "produces": "a Dashboard Decision Register",
+      "step_count": 8,
+      "sample": false
+    },
+    {
+      "id": "c03",
+      "adhyaya": 3,
+      "parva": "II",
+      "parva_title": "The Fog of Kurukshetra",
+      "chapter": "When Every Signal Looks Important",
+      "canvas": "Signal Portfolio and Attention Audit",
+      "produces": "a Signal Operating Policy",
+      "step_count": 9,
+      "sample": false
+    },
+    {
+      "id": "c04",
+      "adhyaya": 4,
+      "parva": "II",
+      "parva_title": "The Fog of Kurukshetra",
+      "chapter": "Sanjaya Lens",
+      "canvas": "Enterprise Situation Picture",
+      "produces": "a governed, role-specific situation brief",
+      "step_count": 10,
+      "sample": false
+    },
+    {
+      "id": "c05",
+      "adhyaya": 5,
+      "parva": "III",
+      "parva_title": "The Memory of the Enterprise",
+      "chapter": "Divya Drishti",
+      "canvas": "Data Nature Fingerprint",
+      "produces": "an Answerability Envelope and augmentation plan",
+      "step_count": 12,
+      "sample": false
+    },
+    {
+      "id": "c06",
+      "adhyaya": 6,
+      "parva": "III",
+      "parva_title": "The Memory of the Enterprise",
+      "chapter": "Vyasa Graph",
+      "canvas": "Vyasa Map",
+      "produces": "a governed context map and Agent Context Pack for one decision",
+      "step_count": 8,
+      "sample": false
+    },
+    {
+      "id": "c07",
+      "adhyaya": 7,
+      "parva": "IV",
+      "parva_title": "The Discipline of Inquiry",
+      "chapter": "Arjuna's Question",
+      "canvas": "Arjuna Inquiry Canvas",
+      "produces": "an Inquiry Pack for one decision",
+      "step_count": 10,
+      "sample": true,
+      "pdf": "downloads/canvases/EPIC_Canvas_07_Arjuna_Inquiry_Canvas.pdf"
+    },
+    {
+      "id": "c08",
+      "adhyaya": 8,
+      "parva": "IV",
+      "parva_title": "The Discipline of Inquiry",
+      "chapter": "The Question Graph",
+      "canvas": "First Question Graph",
+      "produces": "a governed Question Pack",
+      "step_count": 10,
+      "sample": false
+    },
+    {
+      "id": "c09",
+      "adhyaya": 9,
+      "parva": "V",
+      "parva_title": "Guidance and Counsel",
+      "chapter": "Sarathi",
+      "canvas": "Guidance Contract",
+      "produces": "a governed Investigation Route",
+      "step_count": 12,
+      "sample": false
+    },
+    {
+      "id": "c10",
+      "adhyaya": 10,
+      "parva": "V",
+      "parva_title": "Guidance and Counsel",
+      "chapter": "Vidura",
+      "canvas": "Vidura Challenge Canvas",
+      "produces": "a governed Challenge Record",
+      "step_count": 10,
+      "sample": false
+    },
+    {
+      "id": "c11",
+      "adhyaya": 11,
+      "parva": "VI",
+      "parva_title": "The Dharma of Evidence",
+      "chapter": "When an Insight Deserves to Be Believed",
+      "canvas": "Warranted Confidence Review",
+      "produces": "a Warrant Portfolio and a portable Evidence Pack",
+      "step_count": 10,
+      "sample": true,
+      "pdf": "downloads/canvases/EPIC_Canvas_11_Warranted_Confidence_Review.pdf"
+    },
+    {
+      "id": "c12",
+      "adhyaya": 12,
+      "parva": "VI",
+      "parva_title": "The Dharma of Evidence",
+      "chapter": "The Dharma Ledger",
+      "canvas": "First Decision Ledger",
+      "produces": "a reconstructable decision record",
+      "step_count": 10,
+      "sample": false
+    },
+    {
+      "id": "c13",
+      "adhyaya": 13,
+      "parva": "VII",
+      "parva_title": "Giving Intelligence Its Form",
+      "chapter": "Vishvakarma",
+      "canvas": "Representation Portfolio",
+      "produces": "many honest views over one evidence core",
+      "step_count": 10,
+      "sample": false
+    },
+    {
+      "id": "c14",
+      "adhyaya": 14,
+      "parva": "VII",
+      "parva_title": "Giving Intelligence Its Form",
+      "chapter": "One Insight, Many Audiences",
+      "canvas": "Many Audiences, One Meaning",
+      "produces": "a governed communication portfolio",
+      "step_count": 7,
+      "sample": false
+    },
+    {
+      "id": "c15",
+      "adhyaya": 15,
+      "parva": "VIII",
+      "parva_title": "From Counsel to Action",
+      "chapter": "Bhima",
+      "canvas": "From Insight to Action",
+      "produces": "a governed Action Contract and a prepare, pilot, execute or do-not-proceed decision",
+      "step_count": 11,
+      "sample": false
+    },
+    {
+      "id": "c16",
+      "adhyaya": 16,
+      "parva": "VIII",
+      "parva_title": "From Counsel to Action",
+      "chapter": "The Sabha of Enterprise Systems",
+      "canvas": "Enterprise Assembly",
+      "produces": "a Sabha map, an authority register and a contract-gap backlog",
+      "step_count": 9,
+      "sample": false
+    },
+    {
+      "id": "c17",
+      "adhyaya": 17,
+      "parva": "IX",
+      "parva_title": "Karma and Learning",
+      "chapter": "Karma Chakra",
+      "canvas": "Outcome and Learning Review",
+      "produces": "a continuation decision and an update to enterprise memory",
+      "step_count": 12,
+      "sample": false
+    },
+    {
+      "id": "c18",
+      "adhyaya": 18,
+      "parva": "IX",
+      "parva_title": "Karma and Learning",
+      "chapter": "Building the EPIC Enterprise",
+      "canvas": "Enterprise Capability Canvas",
+      "produces": "an EPIC charter and a 180-day proof",
+      "step_count": 11,
+      "sample": false
+    }
+  ]
+}

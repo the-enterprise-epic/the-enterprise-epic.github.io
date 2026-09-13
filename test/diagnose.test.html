@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en-GB" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Diagnostic scoring tests</title>
+<style>
+  body { font: 15px/1.5 ui-monospace, Menlo, monospace; margin: 2rem; color: #1A1A1A; }
+  table { border-collapse: collapse; margin-top: 1rem; }
+  td, th { border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }
+  .pass { background: #E7F0E6; } .fail { background: #F6E1DF; }
+  #summary { font-size: 1.2rem; font-weight: 700; }
+</style>
+</head>
+<body>
+<h1>Diagnostic scoring tests</h1>
+<p>Serve the site folder and open <code>/test/diagnose.test.html</code>. Results also go to the console.</p>
+<p id="summary">Running…</p>
+<table><thead><tr><th>Answers</th><th>Expected</th><th>Got</th><th>What it proves</th></tr></thead><tbody id="rows"></tbody></table>
+
+<script src="../assets/site.js"></script>
+<script src="../assets/diagnose.js"></script>
+<script>
+(function () {
+  /* [answers, level, standing, breakGate, strongest, weakest, note] */
+  const CASES = [
+    ['444444444', 5, 'held', null, null, null, 'All highest; profile line omitted'],
+    ['111111111', 1, 'provisional', 1, null, null, 'All lowest; even scores'],
+    ['443311111', 3, 'provisional', 4, 2, 4, 'Break at Assurance'],
+    ['444441444', 3, 'held', 4, 5, 4, 'Gate mean passes but one zero blocks it'],
+    ['441444444', 2, 'held', 3, 5, 3, 'Strength above the break does not count'],
+    ['333333333', 5, 'provisional', null, null, null, 'Every gate passes, none convincingly'],
+    ['444444414', 4, 'held', 5, 4, 5, 'Break at Consequence'],
+    ['244444444', 1, 'provisional', 1, 5, 1, 'Foundation fails; everything above is moot'],
+    ['444244444', 5, 'held', null, 5, 3, 'A single 1 with no 0 still passes']
+  ];
+  const INVALID = ['31422', '314221349x', 'abc', '', '5444444444', '0444444444', null];
+
+  const rows = document.getElementById('rows');
+  let pass = 0, total = 0;
+
+  function row(input, exp, got, note, ok) {
+    total++; if (ok) pass++;
+    const tr = document.createElement('tr');
+    tr.className = ok ? 'pass' : 'fail';
+    [input, exp, got, note].forEach(function (v) { const td = document.createElement('td'); td.textContent = v; tr.appendChild(td); });
+    rows.appendChild(tr);
+    (ok ? console.log : console.error)((ok ? 'PASS ' : 'FAIL ') + input + '  expected ' + exp + '  got ' + got);
+  }
+
+  window.EPIC.loadJSON('data/diagnostic.json').then(function (data) {
+    const score = window.EPIC.diagnostic.score;
+
+    CASES.forEach(function (c) {
+      const r = score(c[0], data);
+      const exp = 'L' + c[1] + ' ' + c[2] + ' break=' + c[3] + ' strong=' + c[4] + ' weak=' + c[5];
+      const got = r ? ('L' + r.level + ' ' + r.standing + ' break=' + r.breakGate + ' strong=' + r.strongest + ' weak=' + r.weakest) : 'null';
+      row(c[0], exp, got, c[6], got === exp);
+    });
+
+    INVALID.forEach(function (a) {
+      let r, threw = false;
+      try { r = score(a, data); } catch (e) { threw = true; }
+      row(String(a), 'null, no throw', threw ? 'THREW' : String(r), 'Invalid input is rejected safely', !threw && r === null);
+    });
+
+    /* Determinism: the same input always gives the same output. */
+    const a = JSON.stringify(score('443311111', data)), b = JSON.stringify(score('443311111', data));
+    row('443311111 twice', 'identical', a === b ? 'identical' : 'differs', 'Scoring is deterministic', a === b);
+
+    const s = document.getElementById('summary');
+    s.textContent = pass + ' of ' + total + ' passed';
+    s.style.color = pass === total ? '#3C7A52' : '#8E2F2A';
+    document.title = (pass === total ? 'PASS ' : 'FAIL ') + pass + '/' + total;
+  }).catch(function (e) {
+    document.getElementById('summary').textContent = 'Could not load data: ' + e.message;
+  });
+})();
+</script>
+</body>
+</html>

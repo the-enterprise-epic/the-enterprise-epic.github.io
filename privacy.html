@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · The Enterprise EPIC</title>
+<meta name="description" content="What this site measures, what it does not, and how to opt out.">
+<link rel="canonical" href="https://the-enterprise-epic.github.io/privacy.html">
+<meta name="theme-color" content="#20374F">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@500;700&family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .doc h2 { font-size: 1.55rem; margin-top: 2.2rem; }
+  .doc ul { padding-left: 1.2rem; }
+  .doc li { margin: .35rem 0; }
+  .optout { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; margin-top: 1rem; }
+  [data-optstate] { font-family: var(--f-label); font-size: .9rem; color: var(--sepia); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">The Enterprise EPIC</a>
+    <a class="nl" href="index.html#idea">The idea</a>
+    <a class="nl" href="diagnose.html">Diagnostic</a>
+    <a class="nl" href="canvases.html">Canvases</a>
+    <a class="btn gold" href="index.html#buy">Get the book</a>
+  </div>
+</header>
+
+<main id="main">
+<section>
+  <div class="wrap measure doc">
+    <p class="eyebrow">Privacy</p>
+    <h1>What this site knows about you</h1>
+    <p class="lede">Very little, by design.</p>
+
+    <h2>Nothing you enter is kept</h2>
+    <p>The diagnostic scores your answers inside your own browser. They are never sent anywhere, never stored, and never included in any measurement. If you share a result, the answers travel only inside the link you choose to send.</p>
+
+    <h2>No cookies</h2>
+    <p>This site sets no cookies and writes nothing to your device, with one exception you control: if you opt out of measurement below, your browser remembers that choice.</p>
+
+    <h2>What is measured</h2>
+    <p>The site may use Google Analytics 4 in a cookieless mode to count page views and a few actions: starting and finishing the diagnostic, the level reached, downloading a sample canvas, and following a link to a store. Advertising features and Google signals are switched off. IP addresses are anonymised. Because no identifier is stored, repeat visits cannot be linked together.</p>
+    <p>Local previews of the site are never measured.</p>
+
+    <h2>Opting out</h2>
+    <p>You can stop this browser from being measured on this site, permanently.</p>
+    <div class="optout">
+      <a class="btn ghost" href="privacy.html?epic-optout=1">Opt out of measurement</a>
+      <a class="btn ghost" href="privacy.html?epic-optout=0">Opt back in</a>
+      <span data-optstate></span>
+    </div>
+
+    <h2>Third parties</h2>
+    <ul>
+      <li><strong>Google Fonts</strong> serves the typefaces used on every page.</li>
+      <li><strong>Google Analytics</strong> receives the measurements described above, if enabled.</li>
+      <li><strong>Notion Press and Amazon</strong> handle any purchase. Their own privacy terms apply once you leave this site.</li>
+      <li><strong>The author's contact form</strong> on sanjeev-azad.pages.dev receives any note you choose to send, including requests for the canvas pack.</li>
+    </ul>
+
+    <h2>No mailing list</h2>
+    <p>There is no newsletter and no list to join. A request for the canvas pack is answered personally and your address is not added to anything.</p>
+
+    <h2>Illustrations</h2>
+    <p>The illustrations on this site and in the book were created by the author using AI image tools, in the style of an aged engraving. They depict archetypes, not real people, and no illustration portrays any deity.</p>
+
+    <h2>Questions</h2>
+    <p>Use the <a href="https://sanjeev-azad.pages.dev/contact/" rel="noopener">contact form</a>.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot-main">
+  <div class="wrap">
+    <p class="fine" style="margin-top:0;border-top:none;padding-top:0">
+      © <span data-year>2026</span> Sanjeev Azad. All rights reserved.
+      <a href="index.html">Home</a> · <a href="diagnose.html">Diagnostic</a> · <a href="canvases.html">Canvases</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var el = document.querySelector('[data-optstate]');
+    if (!el) return;
+    try {
+      var p = new URLSearchParams(location.search);
+      if (p.has('epic-optout')) {
+        if (p.get('epic-optout') === '0') localStorage.removeItem('epic-optout');
+        else localStorage.setItem('epic-optout', '1');
+      }
+      el.textContent = localStorage.getItem('epic-optout') === '1'
+        ? 'This browser is opted out.'
+        : 'This browser may be measured.';
+    } catch (e) {
+      el.textContent = 'Your browser blocks storage, so it is not measured.';
+    }
+  })();
+</script>
+<script src="assets/analytics.js" data-page="privacy" defer></script>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

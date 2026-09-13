@@ -1,0 +1,83 @@
+/* The Enterprise EPIC: shared page behaviour.
+   Loaded on every page. Exposes a small window.EPIC namespace so later tools
+   (the diagnostic, and the three experiences still to come) share one way of
+   loading data and one way of recording events. */
+(function () {
+  'use strict';
+
+  const EPIC = window.EPIC = window.EPIC || {};
+
+  /* Fetch JSON relative to the site root. Pages declare their depth with
+     <html data-root="../"> when they live in a subfolder. */
+  const root = document.documentElement.dataset.root || '';
+  EPIC.loadJSON = function (path) {
+    return fetch(root + path, { cache: 'no-cache' }).then(function (r) {
+      if (!r.ok) throw new Error(path + ' ' + r.status);
+      return r.json();
+    });
+  };
+
+  /* Analytics hook. analytics.js replaces this when measurement is active;
+     until then events go nowhere, and nothing on the page depends on them. */
+  EPIC.track = EPIC.track || function () {};
+
+  /* Render text safely. Content files may carry <i> and <b> only. */
+  EPIC.richText = function (s) {
+    const esc = String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return esc.replace(/&lt;(\/?)(i|b)&gt;/g, '<$1$2>');
+  };
+
+  /* Mark the current page in the nav. */
+  const here = (location.pathname.split('/').pop() || 'index.html');
+  document.querySelectorAll('.nav a.nl').forEach(function (a) {
+    const target = (a.getAttribute('href') || '').split('#')[0];
+    if (target && target === here) a.setAttribute('aria-current', 'page');
+  });
+
+  /* Buy cards, rendered from data/stores.json into any [data-stores] element.
+     The noscript links inside that element keep the page usable without JS
+     and when opened from the file system, where fetch is blocked. */
+  const buy = document.querySelector('[data-stores]');
+  if (buy) {
+    EPIC.loadJSON('data/stores.json').then(function (data) {
+      buy.innerHTML = '';
+      data.stores.forEach(function (s) {
+        const card = document.createElement('div');
+        card.className = 'store';
+        const qr = document.createElement('div');
+        qr.className = 'qr';
+        try { qr.innerHTML = window.QR ? window.QR.svg(s.url) : ''; } catch (e) { qr.remove(); }
+        card.appendChild(qr);
+
+        const name = document.createElement('div');
+        name.className = 'name';
+        name.textContent = s.name;
+        card.appendChild(name);
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        meta.textContent = s.format + ' · ' + s.region;
+        card.appendChild(meta);
+
+        const a = document.createElement('a');
+        a.className = 'btn';
+        a.href = s.url;
+        a.rel = 'noopener';
+        a.target = '_blank';
+        a.textContent = 'Buy on ' + s.name;
+        a.setAttribute('aria-label', 'Buy The Enterprise EPIC on ' + s.name + ' (opens in a new tab)');
+        card.appendChild(a);
+
+        buy.appendChild(card);
+      });
+    }).catch(function () { /* keep the noscript fallback visible */
+      const ns = buy.querySelector('.fallback');
+      if (ns) ns.hidden = false;
+    });
+  }
+
+  /* Year in the footer. */
+  document.querySelectorAll('[data-year]').forEach(function (el) {
+    el.textContent = new Date().getFullYear();
+  });
+})();

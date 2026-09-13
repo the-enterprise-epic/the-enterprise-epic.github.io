@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where does your enterprise stand? · The Enterprise EPIC</title>
+<meta name="description" content="Nine situations, two minutes. Find the level your enterprise has actually reached on the Five Levels of data value, and where the climb breaks.">
+<link rel="canonical" href="https://the-enterprise-epic.github.io/diagnose.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Where does your enterprise stand?">
+<meta property="og:description" content="Nine situations, two minutes. From The Enterprise EPIC by Sanjeev Azad.">
+<meta property="og:url" content="https://the-enterprise-epic.github.io/diagnose.html">
+<meta property="og:image" content="https://the-enterprise-epic.github.io/assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#20374F">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@500;700&family=Cormorant+Garamond:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .d-intro { display: grid; gap: 2rem; align-items: start; }
+  @media (min-width: 900px) { .d-intro { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+  .d-intro .figure { margin: 0; }
+
+  .notice {
+    border: 1px solid var(--oxblood); background: #FBF3F1; color: var(--nb);
+    border-radius: 6px; padding: .8rem 1rem; margin: 0 0 1.4rem; font-size: 1rem;
+  }
+
+  .progress {
+    position: sticky; top: var(--nav-h); z-index: 20; background: rgba(255, 255, 255, .97);
+    border-bottom: 1px solid var(--hair); padding: .55rem 0; margin-bottom: 1.4rem;
+  }
+  .progress .bar { height: 3px; background: var(--parchment); border-radius: 2px; overflow: hidden; margin-top: .35rem; }
+  .progress .bar::after { content: ""; display: block; height: 100%; width: var(--pct, 0%); background: var(--gold); transition: width .25s ease; }
+  .progress [data-progress] { font-family: var(--f-label); font-size: .82rem; letter-spacing: .06em; color: var(--sepia); }
+  @media (max-width: 600px) {
+    .progress { top: 0; }
+    .q { scroll-margin-top: 70px; }
+  }
+
+  .q { border: 1px solid var(--hair); border-radius: 8px; padding: 1.1rem 1.2rem 1rem; margin: 0 0 1.2rem; scroll-margin-top: calc(var(--nav-h) + 70px); }
+  /* Floating the legend keeps it inside the card instead of on its border. */
+  .q legend { float: left; display: grid; grid-template-columns: auto 1fr; column-gap: .75rem; padding: 0; margin-bottom: .8rem; width: 100%; }
+  .q .opts { clear: both; }
+  .q .qn {
+    grid-row: span 2; font-family: var(--f-display); font-weight: 700; font-size: 1.9rem;
+    color: var(--gold); line-height: 1; min-width: 1.4rem;
+  }
+  .q .eyebrow { margin: 0 0 .2rem; }
+  .q .prompt { font-size: 1.18rem; color: var(--ink); line-height: 1.4; }
+
+  .opts { display: grid; gap: .5rem; }
+  .opt {
+    display: grid; grid-template-columns: auto 1fr; gap: .7rem; align-items: start;
+    border: 1px solid var(--hair); border-radius: 6px; padding: .7rem .85rem; cursor: pointer;
+    font-size: 1.02rem; line-height: 1.45; background: var(--paper);
+    transition: border-color .12s ease, background .12s ease;
+  }
+  .opt:hover { border-color: var(--gold); }
+  .opt input { margin: .32rem 0 0; width: 1.05rem; height: 1.05rem; accent-color: var(--ink); }
+  .opt:has(input:checked) { border-color: var(--ink); background: var(--parchment-pale); box-shadow: inset 3px 0 0 var(--gold); }
+  .opt:has(input:focus-visible) { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .reveal-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 1.6rem; }
+  .reveal-row .btn[aria-disabled="true"] { background: var(--parchment-deep); border-color: var(--parchment-deep); color: var(--sepia); cursor: pointer; opacity: 1; }
+  [data-missing] { color: var(--oxblood); font-size: 1rem; margin: 0; }
+
+  /* result */
+  .shared { font-family: var(--f-label); font-size: .9rem; background: var(--parchment); padding: .6rem .9rem; border-radius: 6px; }
+  .res-grid { display: grid; gap: 2rem; align-items: start; }
+  @media (min-width: 900px) { .res-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; } }
+  .res-head h2 { font-size: clamp(1.9rem, 4.4vw, 2.7rem); margin-bottom: .5rem; outline: none; }
+  .res-head .prov {
+    display: block; margin-top: .45rem; font-family: var(--f-label); font-weight: 700;
+    font-size: .76rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sepia);
+  }
+  .verdict { font-size: 1.16rem; }
+  .brk-line { font-size: 1rem; color: var(--sepia); }
+  .profile { width: 100%; max-width: 450px; height: auto; display: block; margin-top: .5rem; }
+
+  .figure .tier { position: relative; }
+  .figure .tier.above { opacity: .5; }
+  .figure .tier.here { background: rgba(156, 125, 51, .14); border-radius: 4px; box-shadow: inset 3px 0 0 var(--gold); padding-left: .5rem; }
+  .figure .tier.break:not(.here) { opacity: 1; background: rgba(142, 47, 42, .06); box-shadow: inset 3px 0 0 var(--oxblood); padding-left: .5rem; border-radius: 4px; }
+  .figure .mark {
+    margin-left: auto; align-self: center; flex: 0 0 auto; white-space: nowrap;
+    font-family: var(--f-label); font-weight: 700; font-size: .66rem; letter-spacing: .1em; text-transform: uppercase;
+    color: #fff; background: var(--gold); border-radius: 999px; padding: .2rem .55rem;
+  }
+  .figure .mark.brk { background: var(--oxblood); margin-left: .35rem; }
+  .figure .tier .mark + .mark { margin-left: .35rem; }
+
+  .res-body { margin-top: 2rem; }
+  .read-first { margin-top: 2rem; }
+  .chaps .chap { text-decoration: none; color: inherit; }
+  .chaps .chap:hover { border-color: var(--gold); }
+  .chaps .chap h3 { font-size: 1.2rem; }
+  .chaps .chap .eyebrow { margin-bottom: .3rem; }
+  .capability { font-family: var(--f-display); font-size: 1.35rem; color: var(--ink); margin: 1.8rem 0 0; }
+  .capability .eyebrow { font-size: .7rem; }
+  .cta .btn-row { margin-top: 1rem; }
+  .share { margin-top: 1.4rem; }
+  .note { font-size: .95rem; color: var(--sepia); font-style: italic; margin-top: 1.6rem; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">The Enterprise EPIC</a>
+    <a class="nl" href="index.html#idea">The idea</a>
+    <a class="nl" href="index.html#levels">Five levels</a>
+    <a class="nl" href="diagnose.html">Diagnostic</a>
+    <a class="nl" href="canvases.html">Canvases</a>
+    <a class="btn gold" href="index.html#buy">Get the book</a>
+  </div>
+</header>
+
+<main id="main">
+<section>
+  <div class="wrap" id="diagnose">
+
+    <p class="notice" data-notice hidden role="status"></p>
+
+    <div class="d-intro" data-intro>
+      <div>
+        <p class="eyebrow">The Dharma Check · from Adhyaya 1</p>
+        <h1>Where does your enterprise stand?</h1>
+        <p class="lede">Nine situations. Choose the one you recognise, not the one you aspire to.</p>
+        <p>Each question tests one level of the ladder. The result names the level your organisation has actually reached, and where the climb breaks.</p>
+        <p>One rule from the book governs the scoring: strength at one level cannot make up for failure at another. An enterprise that acts decisively but cannot agree what its numbers mean has not reached the top.</p>
+        <p style="font-size:.98rem;color:var(--sepia)">About two minutes. Nothing you choose is stored or sent anywhere.</p>
+      </div>
+      <div data-ladder-intro aria-label="The Five Levels of enterprise data value"></div>
+    </div>
+
+    <form data-form novalidate>
+      <div class="progress" aria-live="polite">
+        <span data-progress>0 of 9 answered</span>
+        <div class="bar" aria-hidden="true"></div>
+      </div>
+
+      <div data-questions></div>
+
+      <noscript><p class="notice">The diagnostic needs JavaScript to score your answers. Everything runs in your browser.</p></noscript>
+
+      <div class="reveal-row">
+        <button class="btn gold" type="submit" data-reveal aria-disabled="true">Reveal my level</button>
+        <p data-missing aria-live="assertive"></p>
+      </div>
+    </form>
+
+    <div data-result hidden></div>
+
+  </div>
+</section>
+</main>
+
+<footer class="foot-main">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>The Enterprise EPIC</h4>
+        <p style="color:#cfd8e2;font-size:.98rem;margin:0">From Data Abundance to Decision Clarity in the AI Era. A book by Sanjeev Azad, published by innovate-with-sanjeev.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="canvases.html">The canvases</a></li>
+          <li><a href="index.html#buy">Get the book</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Elsewhere</h4>
+        <ul>
+          <li><a href="https://sanjeev-azad.pages.dev/about/" rel="noopener">The author</a></li>
+          <li><a href="https://sanjeev-azad.pages.dev/contact/" rel="noopener">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">
+      © <span data-year>2026</span> Sanjeev Azad. All rights reserved.
+      This diagnostic is a reflection aid drawn from the book, not a professional assessment.
+    </p>
+  </div>
+</footer>
+
+<script src="assets/analytics.js" data-page="diagnose" defer></script>
+<script src="assets/site.js" defer></script>
+<script src="assets/diagnose.js" defer></script>
+</body>
+</html>

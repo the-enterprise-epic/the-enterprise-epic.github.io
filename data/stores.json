@@ -1,0 +1,33 @@
+{
+  "isbn": "9798906969040",
+  "stores": [
+    {
+      "id": "notionpress",
+      "name": "Notion Press",
+      "region": "India and worldwide",
+      "format": "Paperback",
+      "url": "https://notionpress.com/in/read/the-enterprise-epic"
+    },
+    {
+      "id": "amazon-in",
+      "name": "Amazon.in",
+      "region": "India",
+      "format": "Paperback",
+      "url": "https://www.amazon.in/dp/B0HJ5GVD6N"
+    },
+    {
+      "id": "amazon-com",
+      "name": "Amazon.com",
+      "region": "United States",
+      "format": "Paperback",
+      "url": "https://www.amazon.com/dp/B0HJ5D9SLF"
+    },
+    {
+      "id": "amazon-uk",
+      "name": "Amazon.co.uk",
+      "region": "United Kingdom",
+      "format": "Paperback",
+      "url": "https://www.amazon.co.uk/dp/B0HJ5D9SLF"
+    }
+  ]
+}
