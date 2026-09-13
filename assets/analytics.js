@@ -9,10 +9,10 @@
    To switch it on:
      1. Create a GA4 property and a web data stream for
         the-enterprise-epic.github.io
-     2. Paste the Measurement ID (G-XXXXXXXXXX) into GA_MEASUREMENT_ID
+     2. Paste the Measurement ID (it starts with G-) into GA_MEASUREMENT_ID
      3. Publish                                                                */
 
-const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+const GA_MEASUREMENT_ID = 'G-5W8PV66W9X';
 
 (function () {
   'use strict';
@@ -46,7 +46,20 @@ const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
     analytics_storage: 'granted'
   });
 
+  /* A diagnostic result link carries the visitor's answers (?v=1&a=...).
+     Answers are never measured, so they are stripped from every address sent,
+     including the referrer when a visitor moves on from a result page. */
+  function clean(href) {
+    try {
+      const u = new URL(href);
+      ['a', 'v', KEY].forEach(function (k) { u.searchParams.delete(k); });
+      return u.href;
+    } catch (e) { return ''; }
+  }
+
   const cfg = {
+    page_location: clean(location.href),
+    page_referrer: clean(document.referrer),
     anonymize_ip: true,
     allow_google_signals: false,
     allow_ad_personalization_signals: false,
@@ -76,7 +89,7 @@ const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
   /* Hand the shared hook to the rest of the site. */
   window.EPIC = window.EPIC || {};
   window.EPIC.track = function (name, props) {
-    gtag('event', name, Object.assign({ source_page: page }, props || {}));
+    gtag('event', name, Object.assign({ source_page: page, page_location: clean(location.href) }, props || {}));
   };
   const track = window.EPIC.track;
 
