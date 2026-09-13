@@ -329,3 +329,7 @@ th {
 
 /* The hidden attribute must win over any layout display rule. */
 [hidden] { display: none !important; }
+
+/* A hyphenated word moves to the next line whole, so no line ends in a
+   dangling hyphen that reads like a dash. Applied by EPIC.keepWordsWhole. */
+.nw { white-space: nowrap; }

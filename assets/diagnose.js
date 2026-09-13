@@ -300,6 +300,7 @@
     els.intro.hidden = true;
     els.form.hidden = true;
     els.result.hidden = false;
+    if (EPIC.keepWordsWhole) EPIC.keepWordsWhole(els.result);
 
     els.result.querySelector('[data-copy-link]').addEventListener('click', function (e) {
       copy(location.origin + location.pathname + '?v=' + data.version + '&a=' + digits, e.currentTarget);
@@ -340,6 +341,7 @@
       data = d;
       els.ladderIntro.innerHTML = ladder(null);
       renderForm();
+      if (EPIC.keepWordsWhole) { EPIC.keepWordsWhole(els.ladderIntro); EPIC.keepWordsWhole(els.questions); }
       els.form.addEventListener('change', onChange);
       els.reveal.addEventListener('click', onReveal);
       updateProgress();

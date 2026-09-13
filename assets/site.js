@@ -76,6 +76,45 @@
     });
   }
 
+  /* Keep hyphenated words whole. A browser may break a line after a hyphen,
+     leaving "innovate-" at the end of one line and "with-sanjeev" at the start
+     of the next, which reads like a stray dash. Each hyphenated word, with any
+     trailing punctuation, is wrapped so it moves to the next line intact.
+     Pages that render text later (the diagnostic) call this again on it. */
+  const COMPOUND = /[A-Za-z0-9’']+(?:-[A-Za-z0-9’']+)+[.,;:!?)]*/g;
+  EPIC.keepWordsWhole = function (scope) {
+    const base = scope || document.body;
+    if (!base) return;
+    const walker = document.createTreeWalker(base, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (node) {
+        const p = node.parentElement;
+        if (!p || p.closest('script, style, svg, textarea, title, .nw')) return NodeFilter.FILTER_REJECT;
+        return /\w-\w/.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      }
+    });
+    const nodes = [];
+    let n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    nodes.forEach(function (node) {
+      const text = node.nodeValue;
+      const frag = document.createDocumentFragment();
+      let last = 0;
+      text.replace(COMPOUND, function (match, offset) {
+        if (offset > last) frag.appendChild(document.createTextNode(text.slice(last, offset)));
+        const span = document.createElement('span');
+        span.className = 'nw';
+        span.textContent = match;
+        frag.appendChild(span);
+        last = offset + match.length;
+        return match;
+      });
+      if (last === 0) return;
+      if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  };
+  EPIC.keepWordsWhole();
+
   /* Year in the footer. */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();
