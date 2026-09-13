@@ -67,7 +67,7 @@ img { max-width: 100%; height: auto; }
   margin: 0 0 .7em;
 }
 
-.lede { font-size: 1.25rem; color: var(--sepia); }
+.lede { font-size: 1.25rem; color: var(--sepia); text-wrap: pretty; }
 .measure { max-width: var(--measure); }
 
 /* --- layout -------------------------------------------------------------- */
@@ -231,6 +231,26 @@ section + section { border-top: 1px solid rgba(156, 125, 51, .18); }
 .figure .split .l { flex: 1; height: 1px; background: var(--gold); opacity: .55; }
 
 /* --- cards --------------------------------------------------------------- */
+
+/* --- running text ------------------------------------------------------ */
+/* Prose reads like the book: justified from tablet width up, with no automatic
+   hyphenation, which would bring back dangling hyphens. On desktop a longer
+   passage sits in two balanced columns, so it fills the page width while each
+   line stays a comfortable length. Phones keep one left-aligned column. */
+.prose p { margin: 0 0 1em; }
+@media (min-width: 720px) {
+  .prose p, .prose-single p:not(.lede) { text-align: justify; hyphens: none; text-wrap: pretty; }
+}
+@media (min-width: 980px) {
+  .prose { columns: 2; column-gap: 3.2rem; column-rule: 1px solid rgba(156, 125, 51, .3); }
+  /* A paragraph never splits across the two columns. */
+  .prose p { break-inside: avoid; }
+}
+
+/* Text beside a figure on desktop, stacked on smaller screens. */
+.two-up { display: grid; gap: 2rem; align-items: center; }
+@media (min-width: 980px) { .two-up { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 3.5rem; } }
+.two-up .figure { margin: 0; }
 
 .grid { display: grid; gap: 1.2rem; }
 @media (min-width: 720px) {

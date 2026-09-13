@@ -73,6 +73,17 @@
   .epic-acronym div { border-top: 2px solid var(--gold); padding-top: .6rem; }
   .epic-acronym b { display: block; font-family: var(--f-display); font-size: 2.2rem; line-height: 1; color: var(--ink); }
   .epic-acronym span { font-family: var(--f-label); font-size: .82rem; letter-spacing: .05em; color: var(--sepia); }
+
+  /* The idea: text on the left, the acronym and aphorism beside it on desktop. */
+  .two-up.idea { align-items: start; }
+  @media (min-width: 980px) {
+    .idea .epic-acronym { grid-template-columns: 1fr; gap: 0; margin: 0; }
+    .idea .epic-acronym div { display: flex; align-items: baseline; gap: 1rem; border-top: 1px solid var(--hair); padding: .55rem 0; }
+    .idea .epic-acronym div:first-child { border-top: 2px solid var(--gold); }
+    .idea .epic-acronym b { font-size: 2rem; width: 1.6rem; }
+    .idea .epic-acronym span { font-size: .92rem; }
+    .idea .aphorism { margin: 1.6rem 0 0; max-width: none; }
+  }
 </style>
 </head>
 <body>
@@ -122,12 +133,14 @@
   <div class="wrap">
     <p class="eyebrow">The idea</p>
     <h2>Knowing more is not the same as understanding better</h2>
-    <div class="measure">
+    <div class="two-up idea">
+    <div class="prose-single">
       <p>Enterprises have spent a decade building the means to collect, store and display data. Dashboards multiplied. Models improved. Yet in the room where a consequential decision is made, the same questions remain: what do we actually know, how sure should we be, and who answers for what happens next?</p>
       <p>The gap is rarely technical. It sits between having information and deserving confidence in it. Closing it takes disciplines most organisations never formalise: noticing what matters, agreeing what it means, asking the right question, challenging the comfortable answer, and learning honestly from consequence.</p>
       <p>The book builds those disciplines into one framework and follows a fictional enterprise as it puts them to work, chapter by chapter, on a single difficult decision.</p>
     </div>
 
+    <div class="idea-visual">
     <div class="epic-acronym" aria-label="Project EPIC stands for Evidence-led Perception, Interpretation and Counsel">
       <div><b>E</b><span>Evidence-led</span></div>
       <div><b>P</b><span>Perception</span></div>
@@ -136,6 +149,8 @@
     </div>
 
     <p class="aphorism">An enterprise can know more<br>and understand less.</p>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -144,9 +159,16 @@
   <div class="wrap">
     <p class="eyebrow">From Adhyaya 1</p>
     <h2>Five levels of enterprise data value</h2>
-    <p class="measure">Most organisations invest heavily in the first two levels and assume the other three will follow on their own. They rarely do.</p>
+    <div class="two-up">
+      <div class="prose-single">
+        <p class="lede">Most organisations invest heavily in the first two levels and assume the other three will follow on their own. They rarely do.</p>
+        <p>Project EPIC begins at the third level, where the question stops being whether data can be reached and becomes whether it can be understood, trusted and turned into a better decision.</p>
+        <div class="btn-row">
+          <a class="btn" href="diagnose.html">Find your level in two minutes</a>
+        </div>
+      </div>
 
-    <div class="figure measure" role="figure" aria-labelledby="fig11">
+    <div class="figure" role="figure" aria-labelledby="fig11">
       <div class="grouplabel gl-top">▲ &nbsp;Where Project EPIC begins</div>
       <div class="grp grp-top">
         <div class="tier"><div class="tk"><svg class="ti" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="1.6"/><line x1="12" y1="4" x2="12" y2="20"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="6.3" y1="6.3" x2="17.7" y2="17.7"/><line x1="17.7" y1="6.3" x2="6.3" y2="17.7"/></svg><span class="tn">5</span></div><div class="tt"><b>Consequence:</b>&nbsp; <i>Did the insight change action and improve an outcome?</i><br><span class="tf">Decision · ownership · intervention · learning</span></div></div>
@@ -161,10 +183,6 @@
       <div class="grouplabel gl-bot">Where most data strategies stop&nbsp; ▼</div>
       <p class="figcap" id="fig11">Figure 1.1 · The climb from data-rich to intelligent</p>
     </div>
-
-    <p class="measure">Project EPIC begins at the third level, where the question stops being whether data can be reached and becomes whether it can be understood, trusted and turned into a better decision.</p>
-    <div class="btn-row">
-      <a class="btn" href="diagnose.html">Find your level in two minutes</a>
     </div>
   </div>
 </section>
@@ -174,7 +192,7 @@
   <div class="wrap">
     <p class="eyebrow">The framework</p>
     <h2>Project EPIC, and the figures behind it</h2>
-    <p class="measure">Each capability borrows one memorable idea from the Mahabharata. Think of these as archetypes, not portraits.</p>
+    <p>Each capability borrows one memorable idea from the Mahabharata. Think of these as archetypes, not portraits.</p>
 
     <div class="scroller">
       <table class="cast">
@@ -196,7 +214,7 @@
       </table>
     </div>
 
-    <div class="glance measure">
+    <div class="glance">
       <p class="lbl">A note on the epic</p>
       <p>The Mahabharata is one of the great epics of ancient India, remembered less for its war than for its questions: how rulers decide, who dares to tell them an unwelcome truth, and how every action returns as consequence. The book borrows a handful of its roles as an architecture for a modern problem. It does not retell the epic, no illustration depicts any deity, and no prior knowledge is needed.</p>
     </div>
@@ -208,7 +226,7 @@
   <div class="wrap">
     <p class="eyebrow">Inside the book</p>
     <h2>Nine Parvas, eighteen Adhyayas</h2>
-    <p class="measure">The book moves in one arc, from perceiving a situation to learning from its consequence. Each Parva adds one movement, and each chapter can also be read on its own.</p>
+    <p>The book moves in one arc, from perceiving a situation to learning from its consequence. Each Parva adds one movement, and each chapter can also be read on its own.</p>
 
     <div class="journey">
       <article class="parva"><img src="assets/img/parva-01.jpg" alt="" loading="lazy" width="600" height="900"><div class="body"><p class="num">Parva I</p><h3>The Kingdom of Data</h3><ol><li><span>1</span>The Great Accumulation</li><li><span>2</span>The Dashboard Delusion</li></ol></div></article>
@@ -229,7 +247,7 @@
   <div class="wrap">
     <p class="eyebrow">Try the ideas</p>
     <h2>Tools for readers, and for the curious</h2>
-    <p class="measure">Free to use. Nothing you enter leaves your browser.</p>
+    <p>Free to use. Nothing you enter leaves your browser.</p>
 
     <div class="grid three-wide">
       <article class="card tool">
@@ -277,7 +295,7 @@
   <div class="wrap">
     <p class="eyebrow">Get the book</p>
     <h2>The Enterprise EPIC, in paperback</h2>
-    <p class="measure">The same edition at every store. Scan a code with your phone, or choose the store nearest you.</p>
+    <p>The same edition at every store. Scan a code with your phone, or choose the store nearest you.</p>
 
     <div class="buy" data-stores>
       <ul class="fallback">
@@ -292,11 +310,13 @@
 
 <!-- AUTHOR -->
 <section id="author">
-  <div class="wrap measure">
+  <div class="wrap">
     <p class="eyebrow">About the author</p>
     <h2>Sanjeev Azad</h2>
+    <div class="prose">
     <p>Sanjeev Azad is an AI and enterprise strategist and an advisor to CXOs. His work connects technology architecture, data, artificial intelligence and engineering to the decisions that carry real consequence.</p>
     <p>Through innovate-with-sanjeev he develops frameworks and practical tools for enterprise AI, decision intelligence and responsible transformation. He is also the author of <a href="https://the-value-cube.github.io/" rel="noopener">The Value Cube</a>.</p>
+    </div>
     <p><a href="https://sanjeev-azad.pages.dev/about/" rel="noopener">More about the author</a></p>
   </div>
 </section>
